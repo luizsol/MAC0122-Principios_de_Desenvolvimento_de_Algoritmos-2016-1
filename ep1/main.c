@@ -8,51 +8,22 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include "parser.h"
 
 ///Holds the production time cost of the i-th machine at the j-th production line
-int s[2][6] = {
-	{7,9,3,4,8,4},
-	{8,5,6,4,5,7}
-	};
+int **s;
 ///Holds the set-up (starting time) cost of the i-th production line
-int e[2][1] = {
-	{2},
-	{4}
-	};
+int e[2][1];
 ///Holds the finishing time cost of the i-th production line
-int x[2][1] = {
-	{3},
-	{2}
-	};
+int x[2][1];
 ///Hods the time that it takes to move an item from the machine s[i][j] to the machine s[1-i][j+i]
-int t[2][5] = {
-	{2,3,1,3,4},
-	{2,1,2,2,1}
-	};
+int **t;
 ///Hods the combined cumulative cost of each production line
-int c[2][6];
+int **c;
 
-/*void populate(){
-	s = {
-	{7,9,3,4,8,4},
-	{8,5,6,4,5,7}
-	};
-
-	e = {
-	{2},
-	{4}
-	};
-
-	x = {
-	{3},
-	{2}
-	};
-
-	t = {
-	{2,3,1,3,4},
-	{2,1,2,2,1}
-	};
-}*/
+///Number of machines on the production line
+int n;
 
 
 int optimize(){
@@ -74,7 +45,6 @@ int optimize(){
 }
 
 int main(int argc, char *argv[]){
-	//populate();
-	printf("%d\n", optimize());	
+	user_input();
 	return 0;
 } 
