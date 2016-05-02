@@ -1,9 +1,19 @@
+/**
+ * File: parser.c
+ * Functions that hadle the input and variable assignments
+ * Source: MAC0122 - University of São Paulo
+ * Repository: https://github.com/luizsol/MAC0122
+ * Author: Luiz Sol (luizedusol@gmail.com)
+ * Date: 2016/04/30
+ */
+
 #include "parser.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <getopt.h>
 
 extern int n;
 extern int ** s;
@@ -58,19 +68,19 @@ int user_input(){
 		return  ERROR;
 	}
 	//s
-	puts("Input the s matrix: ")
+	puts("Input the s matrix: ");
 	for(int i = 0; i < 2; i++){
-		for (int j = 0; i < n; j++){
+		for (int j = 0; j < n; j++){
 			printf("s[%d][%d]\n",i+1,j+1);
 			fgets(input, 100, stdin);
 			s[i][j] = atoi(input);
 		}
 	}
 	//t
-	puts("Input the t matrix: ")
+	puts("Input the t matrix: ");
 	for(int i = 0; i < 2; i++){
-		for (int j = 0; i < n-1; j++){
-			printf("s[%d][%d]\n",i+1,j+1);
+		for (int j = 0; j < n-1; j++){
+			printf("t[%d][%d]\n",i+1,j+1);
 			fgets(input, 100, stdin);
 			t[i][j] = atoi(input);
 		}
@@ -93,15 +103,6 @@ int user_input(){
 	return OK;
 }
 
-void populate(char * values, int ** target){
-	
-}
-
-
-
-
-
-
 
 //! Funcion responsible for haldling input
 /*!
@@ -109,20 +110,26 @@ void populate(char * values, int ** target){
   \param argv the arguments passed to the main funcion
   \return 0 if the input was invalid
 */
-
 int read_params(int argc, char ** argv){
 	///The parameters should be:
 	/* n, s, t, e, x, 221
 	 */
-	char ch;
-	while((ch = getopt(argc, argv, "n:s:t:e:x:")) != EOF)
-		switch(ch){
-		case 'n':
-			n = atoi(optarg);
-			break;
-		case 's':
-			break;	
+
+	if(argc == 1){ //no parameters passed, user input mode
+		user_input();
+	
+	} else { //TODO other forms of parameters reading
+		char ch;
+		while((ch = getopt(argc, argv, "n:s:t:e:x:")) != EOF)
+			switch(ch){
+			case 'n':
+				n = atoi(optarg);
+				break;
+			case 's':
+				break;	
 		}
-	user_input();
+	}
+	
+	
 	return OK;
 }
