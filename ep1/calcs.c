@@ -73,12 +73,12 @@ void print_c_matix(){
 	printf("\n");
 }
 
-/** @brief Prints the best combination of of machines
+/** @brief Prints the best combination of machines
  *
  *  The c matrix represents the minimum time cost needed
- *  to get a product from the beginning to a given machine,
- *  therefore to determine what is the best combination of
- *  machines is necessary to determine the minimal c[i][j]
+ *  to get a product from the beginning to any given machine,
+ *  therefore in order to know what is the best combination
+ *  of machines is necessary to determine the minimal c[i][j]
  *  at any given j-th column, with the exception of the 
  *  last column, in which the minimization needs to include
  *  the exiting time cost x[i][1] of each production line.

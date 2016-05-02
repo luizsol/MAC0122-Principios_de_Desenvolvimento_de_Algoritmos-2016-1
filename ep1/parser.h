@@ -14,7 +14,7 @@
 	#define OK	0
 #endif
 
-/** @brief Funcion responsible for haldling input
+/** @brief Handles input
  *
  *  @param argc the number of arguments passed to the main funcion
  *  @param argv the arguments passed to the main funcion

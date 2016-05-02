@@ -27,7 +27,7 @@ void print_bad_argument(){
 	fprintf(stderr, "Error: bad arguments. Use the parameter --usage for an usage example. Exiting.\n");
 }
 
-/** @brief Initializes the variable size arrays
+/** @brief Initializes the variable sized arrays
  *
  *  @return 0 if there was a problem while initializing the arrays
  */
@@ -108,12 +108,13 @@ int user_input(){
 	return OK;
 }
 
-/** @brief Funcion responsible for spliting a given string based on a given delimiter 
+/** @brief Splits a given string based on a given delimiter
+ *
  *(source=http://stackoverflow.com/questions/9210528/split-string-with-delimiters-in-c)
  *
  *  @param a_str the string to be splitted
  *  @param a_delim the splitting delimiter
- *  @return the pointer to de array containing the result
+ *  @return the pointer to the array containing the result
  */
 char** str_split(char* a_str, const char a_delim){
     char** result    = 0;
@@ -162,12 +163,12 @@ char** str_split(char* a_str, const char a_delim){
     return result;
 }
 
-/** @brief Populates a int matrix with the values of a string which separate its values with a given delimiter
+/** @brief Populates an int matrix with the values of a string which separate its values with a given delimiter
  *
  *  @param n_lines number of lines of the matrix
  *  @param n_col number of columns of the matrix
  *  @param str the string to be read
- *  @param matrix the matrix to be writed
+ *  @param matrix the matrix to be writed at
  *  @param delimiter the character used to separate the values
  */
 void string_to_matrix(int n_lines, int n_col, char * str, int ** matrix, char delimiter){
@@ -180,7 +181,7 @@ void string_to_matrix(int n_lines, int n_col, char * str, int ** matrix, char de
 	}
 }
 
-/** @brief Determine the number of elements on a string divided by a given delimiter
+/** @brief Determines the number of elements on a string divided by a given delimiter
  *
  *  @param str the string to be processed
  *  @param delimiter the character used as the delimiter
@@ -199,7 +200,7 @@ int number_of_elements(char*str, char delimiter){
 	return count+1;
 }
 
-/** @brief Funcion responsible for haldling input from the parameters passed through the terminal
+/** @brief Handles the input from the parameters passed through the terminal
  *
  *  @param argc the number of arguments passed to the main funcion
  *  @param argv the arguments passed to the main funcion
@@ -272,7 +273,7 @@ int terminal_input(int argc, char ** argv){
 	
 }
 
-/** @brief Funcion responsible for haldling input
+/** @brief Handles input
  *
  *  @param argc the number of arguments passed to the main funcion
  *  @param argv the arguments passed to the main funcion
