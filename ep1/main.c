@@ -1,10 +1,9 @@
-/**
- * File: main.c
- * Program dedicated to determine the best production lin
- * Source: MAC0122 - University of São Paulo
- * Repository: https://github.com/luizsol/MAC0122
- * Author: Luiz Sol (luizedusol@gmail.com)
- * Date: 2016/04/30
+/** @file 	main.c
+ *  @brief 	Program dedicated to determine the best production lin
+ *         	Source: MAC0122 - University of São Paulo
+ *         	Repository: https://github.com/luizsol/MAC0122
+ *  @author 	Luiz Sol (luizedusol@gmail.com)
+ *  @date	2016/04/30
  */
 
 #include <stdio.h>
@@ -25,9 +24,12 @@ int **c;
 ///Number of machines on the production line
 int n;
 
-
+/** @brief The program's main function
+ */
 int main(int argc, char *argv[]){
-	read_params(argc, argv);
-	print_output();
-	return 0;
+	if(read_params(argc, argv) == OK){
+		print_output();
+		return 0;
+	}
+	return 1;
 } 
