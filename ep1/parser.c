@@ -43,6 +43,10 @@ int initialize_arrays(){
 	return OK;
 }
 
+//! Receives the user input on an interactive mode
+/*!
+  \return 0 if there was a problem while initializing the arrays
+*/
 int user_input(){
 	char input[100];
 	puts("Input the number of machines on the production line (n): ");
@@ -106,7 +110,7 @@ void populate(char * values, int ** target){
   \return 0 if the input was invalid
 */
 
-int parse(int argc, char ** argv){
+int read_params(int argc, char ** argv){
 	///The parameters should be:
 	/* n, s, t, e, x, 221
 	 */
