@@ -96,14 +96,13 @@ void print_best_combination(){
  *  @return the minimum time cost of the production line
  */
 int optimize(){
-	int i, j;
-	for(j=0;  j<n; j++){
-		for(i=0;  i < 2; i++){
+	for(int j=0;  j<n; j++){
+		for(int i=0;  i < 2; i++){
 			if(j == 0){
 				c[i][j] = e[i][j]+s[i][j];
 			} else {
-				int a = c[i][j-1] + s[i][j];
-				int b = c[1-i][j-1] + t[1-i][j-1] + s[i][j];
+				int a = c[i][j-1] + s[i][j]; //Coming from the same production line
+				int b = c[1-i][j-1] + t[1-i][j-1] + s[i][j]; //Coming from the other production line
 				c[i][j] = (a < b ? a : b);
 			}
 		}
