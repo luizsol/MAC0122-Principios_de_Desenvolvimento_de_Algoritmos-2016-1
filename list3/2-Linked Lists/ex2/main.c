@@ -1,5 +1,5 @@
 /** @file 	main.c
- *  @brief 	Removes any repeated appearences of a given value from the linked list
+ *  @brief 	Realizes some basic operations on lists
  *         	Source: MAC0122 - University of São Paulo
  *         	Repository: https://github.com/luizsol/MAC0122
  *  @author	Luiz Sol (luizedusol@gmail.com)
@@ -19,8 +19,21 @@ int main(int argc, char *argv[]){
 		start_list();
 		populate_list(argv[1]);
 		print_list();
-		puts("Removing duplicated...");
-		remove_duplicated();
+		printf("Input the value to be searched for on the list: ");
+		char str[10];
+		fgets(str, 10, stdin);
+		int idx = loop_search(inicio, atoi(str));
+		if(idx != -1)
+			printf("Found it at v[%d]\n", idx);
+		else
+			printf("Not found.\n");
+		printf("Input the value to be appended to the list: ");
+		fgets(str, 10, stdin);
+		append(atoi(str));
+		puts("New list:");
+		print_list();
+		puts("Removing last element from the list:");
+		remove_idx(get_idx_from_last());
 		print_list();
 		return 0;
 	} else if(argc != 1){

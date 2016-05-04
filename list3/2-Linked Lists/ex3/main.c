@@ -1,5 +1,5 @@
 /** @file 	main.c
- *  @brief 	Removes any repeated appearences of a given value from the linked list
+ *  @brief 	Recursively searchs for the list's middle cell index
  *         	Source: MAC0122 - University of São Paulo
  *         	Repository: https://github.com/luizsol/MAC0122
  *  @author	Luiz Sol (luizedusol@gmail.com)
@@ -19,9 +19,7 @@ int main(int argc, char *argv[]){
 		start_list();
 		populate_list(argv[1]);
 		print_list();
-		puts("Removing duplicated...");
-		remove_duplicated();
-		print_list();
+		printf("The index of the middle cell is %d\n", recursive_middle_search(-1,-1));
 		return 0;
 	} else if(argc != 1){
 		fprintf(stderr, "Bad argumet\n");
