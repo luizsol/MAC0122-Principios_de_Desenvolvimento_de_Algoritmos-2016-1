@@ -12,10 +12,10 @@
  */
 void start_list(){
 	if(VERBOSE_LVL > NO_VERBOSE)
-		printf("Starting up list\n");
+		printf("start_list()\n");
 	
- 	inicio = 0;
- 	livre = 1;
+ 	livre = inicio = 0;
+ 	
  	for(int i = 0; i < MAX; i++){
  		v[i].prox = -1;
  	}
@@ -30,12 +30,14 @@ void start_list(){
  */
 void remove_idx(int idx){
 	if(VERBOSE_LVL > NO_VERBOSE)
-		printf("Removing cell v[%d]\n",idx);
+		printf("remove_idx(%d)\n",idx);
 	if(idx == inicio){
 		if(VERBOSE_LVL == HIGH_VERBOSE)
-			printf("Removing initial cell\n");
+			printf("->Removing initial cell\n");
 		inicio = v[idx].prox;
 	} else {
+		if(VERBOSE_LVL == HIGH_VERBOSE)
+			printf("->Removing v[%d]\n",idx);
 		v[get_previous(idx)].prox = v[idx].prox;
 	}
 	v[idx].prox = -1;
@@ -48,16 +50,16 @@ void remove_idx(int idx){
  */
 int update_free(){
 	if(VERBOSE_LVL > NO_VERBOSE)
-		printf("Updating free cell index\n");
+		printf("update_free()\n");
 	for(int i = 0; i < MAX; i++){
 		if(get_previous(i) == -1 && i != inicio){
 			if(VERBOSE_LVL == HIGH_VERBOSE)
-				printf("New free cell: %d\n", i);
+				printf("->New free cell: %d\n", i);
 			return livre = i;
 		}
 	}
 	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("No free cell available");
+		printf("->No free cell available");
 	return -1; //There is no free cell
 }
 
@@ -67,17 +69,17 @@ int update_free(){
  *  @return the index of the previous cell
  */
 int get_previous(int idx){
-	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("Searching for the cell that preceeds v[%d]: ", idx);
+	if(VERBOSE_LVL > NO_VERBOSE)
+		printf("get_previous(%d)\n", idx);
 	for(int i = 0; i < MAX; i++){
 		if(v[i].prox == idx){
 			if(VERBOSE_LVL == HIGH_VERBOSE)
-				printf("v[%d]\n", i);
+				printf("->Found v[%d]\n", i);
 			return i;
 		}
 	}
 	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("not found\n");
+		printf("->Not found\n");
 	return -1; //Has no previous element linked to this cell
 }
 
@@ -88,19 +90,19 @@ int get_previous(int idx){
  *  @return the index of the cell containing the value
  */
 int loop_search(int start_idx, int value){
-	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("Searching for the cell with the value %d: ", value);
+	if(VERBOSE_LVL > NO_VERBOSE)
+		printf("loop_search(%d,%d)\n", start_idx, value);
 	int idx = start_idx;
 	while(idx != -1){
 		if(v[idx].conteudo == value){
 			if(VERBOSE_LVL == HIGH_VERBOSE)
-				printf("v[%d]\n", idx);
+				printf("->Found v[%d]\n", idx);
 			return idx;	
 		}
 		idx = v[idx].prox;
 	}
 	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("not found\n");
+		printf("->Not found\n");
 	return -1;
 }
 
@@ -109,14 +111,17 @@ int loop_search(int start_idx, int value){
  */
 void remove_duplicated(){
 	if(VERBOSE_LVL > NO_VERBOSE)
-		printf("Searching and removing duplicated values\n");
+		printf("remove_duplicated()\n");
 	int idx = inicio;
 	int to_delete = -1;
 	while(idx != -1){
 		do{
 			to_delete = loop_search(v[idx].prox, v[idx].conteudo);
-			if(to_delete != -1)
+			if(to_delete != -1){
+				if(VERBOSE_LVL == HIGH_VERBOSE)
+					printf("->Foud cell to be deleted: v[%d]\n", to_delete);
 				remove_idx(to_delete);
+			}
 		} while(to_delete != -1);
 		idx = v[idx].prox;
 	}
@@ -127,13 +132,18 @@ void remove_duplicated(){
  *  @return the index of the last cell on the linked list
  */
 int get_idx_from_last(){
-	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("Searching for the index of the last cell: ");
+	if(VERBOSE_LVL > NO_VERBOSE)
+		printf("get_idx_from_last()\n");
+	if(inicio == livre){
+		if(VERBOSE_LVL == HIGH_VERBOSE)
+			printf("->List empty!\n");
+		return -1;
+	}
 	int idx = inicio;
-	while(v[idx].prox =! -1)
+	while(v[idx].prox != -1)
 		idx = v[idx].prox;
 	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("%d\n", idx);
+		printf("->Index from the last item on list: %d\n", idx);
 	return idx;
 }
 
@@ -142,6 +152,8 @@ int get_idx_from_last(){
  *  @param value the value to be inserted
  */
 void append(int value){
+	if(VERBOSE_LVL > NO_VERBOSE)
+		printf("append(%d)\n", value);
 	insert(get_idx_from_last(), value);
 }
 
@@ -151,15 +163,21 @@ void append(int value){
  *  @param value the value to be inserted
  */
 void insert(int idx, int value){
-	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("v[%d]:(%d,%d)\nv[%d]:(%d,%d)\n", idx, v[idx].conteudo, v[idx].prox, v[idx].prox, v[v[idx].prox].conteudo, v[v[idx].prox].prox);
-	if(VERBOSE_LVL > NO_VERBOSE)
-		printf("Inserting the value %d after the cell v[%d]\n", value, idx);
 	v[livre].conteudo = value;
-	v[livre].prox = v[idx].prox;
-	v[idx].prox = livre;
+	if(VERBOSE_LVL > NO_VERBOSE)
+		printf("insert(%d,%d)\n", idx, value);
+	if(idx == -1){ //Empty list
+		if(VERBOSE_LVL == HIGH_VERBOSE)
+			printf("->Starting up empty list\n");
+		v[livre].prox = -1;
+	} else {
+		if(VERBOSE_LVL == HIGH_VERBOSE)
+			printf("->Contents of the cell to be inserted to: v[%d]:(%d,%d)\n", idx, v[idx].conteudo, v[idx].prox);
+		v[livre].prox = v[idx].prox;
+		v[idx].prox = livre;
+	}
 	if(VERBOSE_LVL == HIGH_VERBOSE)
-		printf("v[%d]:(%d,%d)\nv[%d]:(%d,%d)\n", idx, v[idx].conteudo, v[idx].prox, v[idx].prox, v[v[idx].prox].conteudo, v[v[idx].prox].prox);
+		printf("->Cell to be inserted: v[%d]:(%d,%d)\n", livre, v[livre].conteudo, v[livre].prox);
 	update_free();
 }
 
@@ -167,8 +185,9 @@ void insert(int idx, int value){
  *
  */
 void print_list(){
+	if(VERBOSE_LVL > NO_VERBOSE)
+		printf("print_list()\n");
 	int idx = inicio;
-
 	while(v[idx].prox != -1){
 		printf("(%d)->", v[idx].conteudo);
 		idx = v[idx].prox;
@@ -181,6 +200,9 @@ void print_list(){
  *
  */
 void print_array(){
+	if(VERBOSE_LVL > NO_VERBOSE)
+		printf("print_array()\n");
+	printf("->inicio: %d, livre: %d\n->", inicio, livre);
 	for(int i = 0; i < MAX; i++)
 		printf("(%d,%d) ", v[i].conteudo, v[i].prox);
 	puts("");

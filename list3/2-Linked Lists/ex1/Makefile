@@ -3,10 +3,10 @@
 lists.o: lists.c lists.h
 	gcc -std=gnu99 -c lists.c
 
-parse.o: lists.c lists.h parse.c parse.h
+parse.o: lists.h lists.c parse.c parse.h
 	gcc -std=gnu99 -c parse.c
 
-main.o: main.c lists.c lists.h parse.c parse.h
+main.o: main.c parse.h lists.h
 	gcc -std=gnu99 -c main.c
 
 main: main.o parse.o lists.o

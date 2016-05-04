@@ -18,12 +18,10 @@ int main(int argc, char *argv[]){
 	if(argc == 2){
 		start_list();
 		populate_list(argv[1]);
-		//print_list();
-		print_array();
+		print_list();
 		puts("Removing duplicated...");
 		remove_duplicated();
-		//print_list();
-		print_array();
+		print_list();
 		return 0;
 	} else if(argc != 1){
 		fprintf(stderr, "Bad argumet\n");

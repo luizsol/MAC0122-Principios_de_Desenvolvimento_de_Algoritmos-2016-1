@@ -19,7 +19,7 @@
  *  1: basic function reporting
  *  2: full function reporting
  */
-#define VERBOSE_LVL 	2
+#define VERBOSE_LVL 	0
 
 #define NO_VERBOSE	0
 #define LOW_VERBOSE	1
