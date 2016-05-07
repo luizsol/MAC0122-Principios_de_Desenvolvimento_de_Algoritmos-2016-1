@@ -95,27 +95,28 @@ void print_best_combination(){
  *
  *  @return the minimum time cost of the production line
  */
-int optimize(){
-	for(int j=0;  j<n; j++){
-		for(int i=0;  i < 2; i++){
-			if(j == 0){
-				c[i][j] = e[i][j]+s[i][j];
-			} else {
-				int a = c[i][j-1] + s[i][j]; //Coming from the same production line
-				int b = c[1-i][j-1] + t[1-i][j-1] + s[i][j]; //Coming from the other production line
-				c[i][j] = (a < b ? a : b);
-			}
+int optimize(int j){
+	if(n==j){
+		int a = c[0][n-1] + x[0][0];
+		int b = c[1][n-1] + x[1][0];
+		return (a < b ? a : b);
+	}
+	for(int i=0;  i < 2; i++){
+		if(j == 0){
+			c[i][j] = e[i][j]+s[i][j];
+		} else {
+			int a = c[i][j-1] + s[i][j]; //Coming from the same production line
+			int b = c[1-i][j-1] + t[1-i][j-1] + s[i][j]; //Coming from the other production line
+			c[i][j] = (a < b ? a : b);
 		}
 	}
-	int a = c[0][n-1] + x[0][0];
-	int b = c[1][n-1] + x[1][0];
-	return (a < b ? a : b);
+	return optimize(j+1);
 }
 
 /** @brief Prints all the needed outputs
  */
 void print_output(){	
-	optimize();
+	optimize(0);
 	print_input();
 	print_c_matix();
 	print_best_combination();

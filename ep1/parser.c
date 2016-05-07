@@ -209,7 +209,6 @@ int number_of_elements(char*str, char delimiter){
 int terminal_input(int argc, char ** argv){
 	int has_n, has_s, has_t, has_e, has_x;
 	has_n = has_s = has_t = has_e = has_x = 0;
-	char *temp_n; 
 	char *temp_s; 
 	char *temp_t;
 	char *temp_e, **char_e;
@@ -290,8 +289,7 @@ int read_params(int argc, char ** argv){
 		return ERROR;
 	} else if(argc == 11){
 		return terminal_input(argc, argv);
-	} else {
-		print_bad_argument();
-		return ERROR;
 	}
+	print_bad_argument();
+	return ERROR;
 }

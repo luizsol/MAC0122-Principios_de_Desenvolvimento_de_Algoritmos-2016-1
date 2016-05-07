@@ -92,3 +92,28 @@ void print_list(List *list){
 	}
 	printf("(%d)\n", ptr->content);
 }
+
+/** @brief Reverses the order of the list recursively
+ *
+ *  @param list the List to be reversed
+ *  @param current_cell the current cell to be worked with
+ *  @param last_cell the last cell of the list
+ */
+void recursive_reverse_list(List *list, Cell *current_cell, Cell *last_cell){
+	if(current_cell->next != last_cell){ //Not dealing with the last cell yet
+		recursive_reverse_list(list, current_cell->next, last_cell);
+	}
+	current_cell->next->next = current_cell; //Making the next cell point to this cell
+	if(current_cell == list->first){
+		list->first = last_cell;
+		current_cell->next = 0;
+	}
+}
+
+/** @brief Reverses the order of the list
+ *
+ *  @param list the List to be reversed
+ */
+void reverse_list(List *list){
+	recursive_reverse_list(list, list->first, get_last_cell(list));
+}

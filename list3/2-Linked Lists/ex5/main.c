@@ -16,13 +16,13 @@
  */
 int main(int argc, char *argv[]){
 	if(argc == 2){
-		List lista;
-		populate_list(&lista, argv[1]);
+		List list1;
+		populate_list(&list1, argv[1]);
 		puts("Original list:");
-		print_list(&lista);
-		reverse_list(&lista);
-		puts("Reverse list:");
-		print_list(&lista);
+		print_list(&list1);
+		sort(&list1);
+		puts("Sorted list:");
+		print_list(&list1);
 		return 0;
 	} else if(argc != 1){
 		fprintf(stderr, "Bad argumet\n");

@@ -12,5 +12,8 @@ main.o: main.c parse.h lists.h
 main: main.o parse.o lists.o
 	gcc -std=gnu99 main.o parse.o lists.o -o main
 
+all:
+	gcc -std=gnu99 main.c lists.c parse.c -o main
+
 clean:
 	rm main *.o
