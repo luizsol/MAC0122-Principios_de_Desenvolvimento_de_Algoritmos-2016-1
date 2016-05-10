@@ -15,18 +15,23 @@
  *  @return the finishing status of the funcion
  */
 int main(int argc, char *argv[]){
-	if(argc == 2){
-		List list1;
-		populate_list(&list1, argv[1]);
-		puts("Original list:");
-		print_list(&list1);
-		sort(&list1);
+	if(argc == 3){
+		List *list1, *list2;
+		list1 = new_empty_list();
+		list2 = new_empty_list();
+		populate_list(list1, argv[1]);
+		populate_list(list2, argv[2]);
+		puts("Original lists:");
+		print_list(list1);
+		print_list(list2);
 		puts("Sorted list:");
-		print_list(&list1);
+		merge_lists(list1, list2);
+		sort(list1);
+		print_list(list1);
 		return 0;
 	} else if(argc != 1){
 		fprintf(stderr, "Bad argumet\n");
 	}
-	printf("Usage:\n./main <comma separetad list>\n");
+	printf("Usage:\n./main <comma separetad list> <comma separetad list>\n");
 	return 1;
 }

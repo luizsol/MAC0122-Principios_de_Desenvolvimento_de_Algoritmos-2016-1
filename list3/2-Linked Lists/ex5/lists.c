@@ -189,7 +189,11 @@ List *merge_lists(List *list1, List *list2){
 	if(VERBOSE_LVL >= LOW_VERBOSE){
 		printf("merge_lists(%p, %p)\n", (void*)list1, (void*)list2);
 	}
-	get_last_cell(list1)->next = list2->first;
+	if(is_empty(list1)){
+		list1->first = list2->first;
+	} else {
+		get_last_cell(list1)->next = list2->first;
+	}
 	list2->first = 0;
 	return list1;
 }
@@ -210,7 +214,6 @@ Cell *get_cell_by_idx(List *list, int idx){
 		cell = cell->next;
 		i++;
 	}
-	printf("i=%d, address=%p, content %d\n", i, (void*)cell, cell->content);	
 	return cell;
 }
 
@@ -259,9 +262,26 @@ Cell *remove_by_idx(List *list, int idx){
  *  @return the index of the lowest Cell
  */
 int get_min(List *list){
-	if(is_empty(list) == 0) return 0;
-	int min = 0;
-	for(int i = list_len(list), i > 0; i--){
-		if(get_cell_by_idx(i-1)->value <= cell->value)
+	if(is_empty(list)) return 0;
+	int idx = 0;
+	int min = list->first->content;
+	for(int i = list_len(list)-1; i > 0; i--){
+		if(get_cell_by_idx(list, i)->content <= min){
+			idx = i;
+			min = get_cell_by_idx(list,i)->content;
+		}
 	}
+	return idx;
+}
+
+/** @brief Sorts a list using the merge sort technique
+ *
+ *  @param list the list to be sorted
+ */
+void sort(List *list){
+	List *n_list = new_empty_list();
+	while(is_empty(list) != 1){
+		append(n_list, remove_by_idx(list,get_min(list))->content);
+	}
+	merge_lists(list, n_list);
 }

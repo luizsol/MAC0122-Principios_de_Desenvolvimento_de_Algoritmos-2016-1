@@ -134,10 +134,17 @@ List *split(List *list, int idx);
  */
 Cell *remove_by_idx(List *list, int idx);
 
+/** @brief Searches for the lowest element on the list
+ *
+ *  @param list the List to be searched
+ *  @return the index of the lowest Cell
+ */
+int get_min(List *list);
+
 /** @brief Sorts a list using the merge sort technique
  *
  *  @param list the list to be sorted
  */
-List *sort(List *list);
+void sort(List *list);
 
 #endif
