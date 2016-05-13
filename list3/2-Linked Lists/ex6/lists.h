@@ -147,4 +147,11 @@ int get_min(List *list);
  */
 void sort(List *list);
 
+/** @brief Splits a list into an even and an odd list
+ *
+ *  @param list the List to be splitted (this list will retain de odd numbers)
+ *  @return the list containing the even numbers
+ */
+List *split_by_parity(List *list);
+
 #endif

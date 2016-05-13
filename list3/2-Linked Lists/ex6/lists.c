@@ -80,7 +80,12 @@ Cell *append_cell(List *list, Cell *cell){
 	if(VERBOSE_LVL >= LOW_VERBOSE){
 		printf("append_cell(%p, %p)\n", (void*)list, (void*)cell);
 	}
-	get_last_cell(list)->next = cell;
+	if(list_len(list) == 0){
+		list->first = cell;
+	} else {
+		get_last_cell(list)->next = cell;
+	}
+	cell->next = 0;
 	return cell;
 }
 
@@ -284,4 +289,24 @@ void sort(List *list){
 		append(n_list, remove_by_idx(list,get_min(list))->content);
 	}
 	merge_lists(list, n_list);
+}
+
+/** @brief Splits a list into an even and an odd list
+ *
+ *  @param list the List to be splitted (this list will retain de odd numbers)
+ *  @return the list containing the even numbers
+ */
+List *split_by_parity(List *list){
+	List *odd_list = new_empty_list();
+	List *even_list = new_empty_list();
+	while(is_empty(list) != 1){
+		if(list->first->content % 2 != 0){
+			append_cell(odd_list, remove_by_idx(list, 0));
+		} else {
+			append_cell(even_list, remove_by_idx(list, 0));
+		}
+	}
+	list->first = even_list->first;
+	free(even_list);
+	return odd_list;
 }
