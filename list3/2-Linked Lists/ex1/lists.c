@@ -26,7 +26,7 @@ void start_list(){
 
 /** @brief Removes a cell from the linked list
  *
- *  @rparam the index of the element
+ *  @param the index of the element
  */
 void remove_idx(int idx){
 	if(VERBOSE_LVL > NO_VERBOSE)
