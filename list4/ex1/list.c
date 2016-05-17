@@ -15,7 +15,7 @@
  	Celula *cell = (Celula*)malloc(sizeof(Celula));
  	cell->prox = NULL;
  	return cell;
- }
+}
 
 /** @brief Determines the size of the list
  *
@@ -29,4 +29,5 @@ int length(Celula *ini){
  		ini = ini->prox;
  	}
  	return size-1;
- }
+}
+
