@@ -12,7 +12,7 @@
 /**
  *  Represents the products being bought
  */
-typedef struct produto{
+typedef struct produto {
 	/*@{*/
 	char *id;		/**< the id of the product */
 	char *nome;		/**< the name of the client */
@@ -35,5 +35,10 @@ typedef struct {
 	/*@}*/
 } Cliente;
 
+/** @brief Initializes the array of clients
+ *
+ *  @param size the maximum number of clients
+ */
+Cliente ** new_clients_array(int size);
 
 #endif
