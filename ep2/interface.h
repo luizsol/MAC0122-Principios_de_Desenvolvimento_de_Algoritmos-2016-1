@@ -9,5 +9,6 @@
 #ifndef __INTERFACE__H
 #define __INTERFACE__H
 
+#include "data.h"
 
 #endif
