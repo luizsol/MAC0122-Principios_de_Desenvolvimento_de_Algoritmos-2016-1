@@ -16,7 +16,7 @@
 #define OK 		0
 #define ERR 		-1
 
-#define VERB_LVL	3
+#define VERB_LVL	0
 
 #define NO_VERB		0
 #define LOW_VERB	1
@@ -49,8 +49,6 @@ typedef struct {
 	/*@}*/
 } Cliente;
 
-
-
 /** @brief Initializes the array of clients
  *
  *  @param size the maximum number of clients
@@ -63,7 +61,7 @@ Cliente ** novo_array_clientes(int size);
  *  @param clientes the clients array
  *  @return the index of the client pointer on a clients array
  */
-int buscar_cliente(long int cpf , Cliente ** clientes, int size); //TODO checar
+int buscar_cliente(long int cpf , Cliente ** clientes, int size);
 
 /** @brief Creates and inserts a new client on a clients array
  *
@@ -76,7 +74,7 @@ int buscar_cliente(long int cpf , Cliente ** clientes, int size); //TODO checar
  *  @param size the size of the array
  *  @return the status of the operation
  */
-int inserir_novo_cliente(long int cpf, char *nome, char *fone, char *email, Cliente **clientes, int size); //TODO checar
+int inserir_novo_cliente(long int cpf, char *nome, char *fone, char *email, Cliente **clientes, int size);
 
 /** @brief Removes a client from a clients array
  *
@@ -85,7 +83,7 @@ int inserir_novo_cliente(long int cpf, char *nome, char *fone, char *email, Clie
  *  @param size the size of the array
  *  @return the status of the operation
  */
-int remover_cliente(long int cpf , Cliente ** clientes, int size); //TODO checar
+int remover_cliente(long int cpf , Cliente ** clientes, int size);
 
 /** @brief Updates the client's phone number
  *
@@ -95,7 +93,37 @@ int remover_cliente(long int cpf , Cliente ** clientes, int size); //TODO checar
  *  @param size the size of the array
  *  @return the status of the operation
  */
-int atualizar_telefone(char novo_telefone [20], long int cpf , Cliente * clientes [], int size); //TODO checar
+int atualizar_telefone(char* novo_telefone, long int cpf , Cliente ** clientes, int size);
+
+/** @brief Updates the client's name
+ *
+ *  @param novo_nome the client's new name
+ *  @param cpf the client's CPF
+ *  @param clientes the clients array
+ *  @param size the size of the array
+ *  @return the status of the operation
+ */
+int atualizar_nome(char* novo_nome, long int cpf , Cliente ** clientes, int size);
+
+/** @brief Updates the client's CPF
+ *
+ *  @param novo_cpf the client's new cpf
+ *  @param cpf the client's CPF
+ *  @param clientes the clients array
+ *  @param size the size of the array
+ *  @return the status of the operation
+ */
+int atualizar_cpf(long int novo_cpf, long int cpf , Cliente ** clientes, int size);
+
+/** @brief Updates the client's e-Mail
+ *
+ *  @param email the client's new e-Mail
+ *  @param cpf the client's CPF
+ *  @param clientes the clients array
+ *  @param size the size of the array
+ *  @return the status of the operation
+ */
+int atualizar_email(char* email, long int cpf , Cliente ** clientes, int size);
 
 /** @brief Inserts a new product into a given client's products list
  *
@@ -127,5 +155,32 @@ int desfazer_ultima_compra(long int cpf , Cliente ** clientes, int size); //TODO
  *  @return the status of the operation
  */
 int remover_todos_produtos(long int cpf , Cliente ** clientes, int size); //TODO checar
+
+/** @brief Gets a product by its index
+ *
+ *  @param cpf the client's CPF
+ *  @param clientes the clients array
+ *  @param size the size of the array
+ *  @param idx the index of the product
+ *  @return the status of the operation
+ */
+Produto* selecionar_produto_idx(long int cpf, Cliente** clientes, int size, int idx);
+
+/** @brief Determines the ammount of products bought by a given person
+ *
+ *  @param cpf the client's CPF
+ *  @param clientes the clients array
+ *  @param size the size of the array
+ *  @return the ammount of products bought by a given person
+ */
+int quantidade_produtos(long int cpf, Cliente** clientes, int size);
+
+/** @brief Determines the number of clients on a clients array
+ *
+ *  @param clientes the clients array
+ *  @param size the size of the array
+ *  @return the number of clients
+ */
+int numero_clientes(Cliente ** clientes, int size);
 
 #endif

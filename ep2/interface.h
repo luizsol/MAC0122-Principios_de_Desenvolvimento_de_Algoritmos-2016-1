@@ -10,5 +10,24 @@
 #define __INTERFACE__H
 
 #include "data.h"
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <string.h>
+
+#define SIZE 100
+//#define WINDOWS //Uncomment if in a windows enviroment
+
+#define MENU_PRINCIPAL 		0
+#define ADICIONAR_CLIENTE	1
+#define REMOVER_CLIENTE 	2
+#define EDITAR_CLIENTE		3
+#define VISUALIZAR_TUDO		4
+#define EDITAR_CARRINHO 	5
+
+/** @brief The main loop that executes the system
+ *
+ *  @return the execution status
+ */
+int start();
 
 #endif
